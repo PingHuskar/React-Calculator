@@ -34,3 +34,28 @@ export const Current = styled.div`
     color: white;
     font-size: 2.5rem;
 `
+
+export const Button = styled.button`
+    cursor: pointer;
+    font-size: 2rem;
+    border: 1px outset white;
+    outline: none;
+    background: rgba(255, 255, 255, 0.75);
+    &:hover {
+        background: rgba(255, 255, 255, 0.9);
+    }
+
+    /*
+    ${function({gridSpan}) {
+        if (gridSpan) {
+            return `grid-column: span ${gridSpan};`
+        }
+    }}
+    */
+    
+    ${({gridSpan}) => gridSpan && `grid-column: span ${gridSpan};`}
+    ${({operation}) => operation && `background: gray;`}
+    ${({control}) => control && `background: skyblue;`}
+    ${({equals}) => equals && `border-bottom-right-radius: 10px;background: gray;`}
+    ${({period}) => period && `border-bottom-left-radius: 10px;background: skyblue;`}
+`
