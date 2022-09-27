@@ -7,12 +7,19 @@ const Calculator = () => {
   const [operation,setOperation] = useState('')
   const appendValue = (el) => {
     const value = el.target.getAttribute('data')
+    if (value === '.' && current === '') {
+      setCurrent('0')
+    }
     if (value === '.' && current.includes('.')) return
     setCurrent(current + value)
   }
 
   const handleDelete = () => {
-    setCurrent(String(current.slice(0,-1)))
+    if (current.length !== undefined) {
+      console.log(current.length)
+      console.log(current.slice(0,-1))
+      setCurrent(String(current.slice(0,-1)))
+    }
   }
   const handleAllClear = () => {
     setCurrent('')
