@@ -20,6 +20,30 @@ const Calculator = () => {
     setOperation('')
   }
 
+  const chooseOperation = (el) => {
+    if (current === '') return
+    if (previous !== '') {
+      let value = compute()
+      setPrevious(value)
+    } else {
+      setPrevious(current)
+    }
+    setCurrent('')
+    setOperation(el.target.getAttribute('data'))
+  }
+
+  const compute = () => {
+
+  }
+
+  const equals = () => {
+    let value = compute()
+    if (value === undefined || value === null) return
+    setCurrent(value)
+    setPrevious('')
+    setOperation('')
+  }
+
 
   return (
     <Container>
@@ -29,22 +53,22 @@ const Calculator = () => {
       </Screen>
       <Button gridSpan={2} control onClick={handleAllClear}>AC</Button>
       <Button control onClick={handleDelete}>DEL</Button>
-      <Button operation>÷</Button>
+      <Button data={'÷'} onClick={chooseOperation} operation>÷</Button>
       <Button data={'7'} onClick={appendValue}>7</Button>
-      <Button data={'8'}onClick={appendValue}>8</Button>
+      <Button data={'8'} onClick={appendValue}>8</Button>
       <Button data={'9'} onClick={appendValue}>9</Button>
-      <Button operation>x</Button>
+      <Button data={'×'} onClick={chooseOperation} operation>×</Button>
       <Button data={'4'} onClick={appendValue}>4</Button>
       <Button data={'5'} onClick={appendValue}>5</Button>
       <Button data={'6'} onClick={appendValue}>6</Button>
-      <Button operation>+</Button>
+      <Button data={'+'} onClick={chooseOperation} operation>+</Button>
       <Button data={'1'} onClick={appendValue}>1</Button>
       <Button data={'2'} onClick={appendValue}>2</Button>
       <Button data={'3'} onClick={appendValue}>3</Button>
-      <Button operation>-</Button>
+      <Button data={'-'} onClick={chooseOperation} operation>-</Button>
       <Button period data={'.'} onClick={appendValue}>.</Button>
       <Button data={'0'} onClick={appendValue}>0</Button>
-      <Button gridSpan={2} equals>=</Button>
+      <Button gridSpan={2} equals onClick={equals}>=</Button>
     </Container>
   )
 }
