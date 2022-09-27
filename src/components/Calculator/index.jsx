@@ -3,20 +3,32 @@ import { Button, Container, Current, Previous, Screen } from './Styled'
 
 const Calculator = () => {
   const [current,setCurrent] = useState('')
+  const [previous,setPrevious] = useState('')
+  const [operation,setOperation] = useState('')
   const appendValue = (el) => {
     const value = el.target.getAttribute('data')
     if (value === '.' && current.includes('.')) return
     setCurrent(current + value)
   }
 
+  const handleDelete = () => {
+    setCurrent(String(current.slice(0,-1)))
+  }
+  const handleAllClear = () => {
+    setCurrent('')
+    setPrevious('')
+    setOperation('')
+  }
+
+
   return (
     <Container>
       <Screen>
-        <Previous>10 +</Previous>
+        <Previous>{previous} {operation}</Previous>
         <Current>{current}</Current>
       </Screen>
-      <Button gridSpan={2} control>AC</Button>
-      <Button control>DEL</Button>
+      <Button gridSpan={2} control onClick={handleAllClear}>AC</Button>
+      <Button control onClick={handleDelete}>DEL</Button>
       <Button operation>÷</Button>
       <Button data={'7'} onClick={appendValue}>7</Button>
       <Button data={'8'}onClick={appendValue}>8</Button>
